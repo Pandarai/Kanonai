@@ -18,7 +18,6 @@ public class KanonaiOnline extends StateBasedGame {
 
     
     // Game state identifiers
-    public static final int SPLASHSCREEN = 0;
     public static final int MAINMENU     = 1;
     public static final int GAME         = 2;
 
@@ -33,13 +32,13 @@ public class KanonaiOnline extends StateBasedGame {
      */
     public static void main(String[] args) { 
         try {
-            AppGameContainer app = new AppGameContainer(new KanonaiOnline("Kanoi"));
+            AppGameContainer app;
+            app = new AppGameContainer(new KanonaiOnline("Kanoi"));
             app.setDisplayMode(WIDTH, HEIGHT, false);
             app.setTargetFrameRate(FPS);
             app.setShowFPS(true);
             app.start();
         } catch(SlickException e) {
-            e.printStackTrace();
         }
     }
 
@@ -50,7 +49,7 @@ public class KanonaiOnline extends StateBasedGame {
     @Override
     public void initStatesList(GameContainer gc) throws SlickException {
         // The first state added will be the one that is loaded first, when the application is launched
-        //this.addState(new SplashScreen(SPLASHSCREEN));
+        this.addState(new SplashScreen());
         //this.addState(new MainMenu(MAINMENU));
         //this.addState(new Game(GAME));
     }
