@@ -6,14 +6,22 @@
 package kanonaionline;
 
 import java.util.concurrent.ThreadLocalRandom;
+import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.command.InputProvider;
+import org.newdawn.slick.command.KeyControl;
 import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.FadeInTransition;
+import org.newdawn.slick.state.transition.FadeOutTransition;
+import org.newdawn.slick.state.transition.HorizontalSplitTransition;
+import org.newdawn.slick.state.transition.Transition;
+import org.newdawn.slick.state.transition.VerticalSplitTransition;
 
 /**
  *
@@ -25,7 +33,11 @@ public class SplashScreen implements GameState {
     
     private final Image splash;
     
+    private final Image[] frames = new Image[4];
+    
     private final int[][] color = new int[100][3];
+    
+    private final Animation splashs;
     
     @Override
     public int getID() {
@@ -34,28 +46,25 @@ public class SplashScreen implements GameState {
     
     public SplashScreen() throws SlickException{
         this.splash = new Image("res/splash.png");
-        
+        frames[0] = splash;
+        frames[1] = new Image("res/splash1.png");
+        frames[2] = new Image("res/splash2.png");
+        frames[3] = new Image("res/splash3.png");
+        splashs = new Animation(frames, 200);
     }
 
     @Override
     public void init(GameContainer gc, StateBasedGame sbg) throws SlickException {
-        for(int i = 0; i < 100; i++){
-            for(int j = 0; j < 3; j++){
-                color[i][j] = randInt();
-            }
-        }
+
+        InputProvider provider = new InputProvider(gc.getInput());
         render(gc, sbg, new Graphics());
     }
 
     @Override
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
-        splash.draw();
-        
-        for(int i = 0; i < 100; i++){
-            grphcs.setColor(new Color(color[i][0], color[i][1], color[i][2]));
-            grphcs.fillRect(8*i, 0, 8, 8);
-        }
-        
+       
+        grphcs.drawAnimation(splashs, 0, 0);
+        splash.flushPixelData();
         
     }
     
@@ -68,7 +77,10 @@ public class SplashScreen implements GameState {
 
     @Override
     public void update(GameContainer gc, StateBasedGame sbg, int i) throws SlickException {
-        
+        if(gc.getInput().isKeyPressed(Input.KEY_SPACE)){
+            sbg.addState(new MainMenu());
+            sbg.enterState(1, new FadeOutTransition(Color.white, 300), new FadeInTransition(Color.white, 240));
+        }
     }
 
     @Override

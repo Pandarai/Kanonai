@@ -25,7 +25,7 @@ public class KanonaiOnline extends StateBasedGame {
     public static final int WIDTH   = 800;
     public static final int HEIGHT  = 500;
     public static final int FPS     = 60;
-    public static final double VERSION = 1.0;
+    public static final double VERSION = 0.01;
     
     /**
      * @param args the command line arguments
@@ -33,10 +33,10 @@ public class KanonaiOnline extends StateBasedGame {
     public static void main(String[] args) { 
         try {
             AppGameContainer app;
-            app = new AppGameContainer(new KanonaiOnline("Kanoi"));
+            app = new AppGameContainer(new KanonaiOnline("Kanonai " + VERSION));
             app.setDisplayMode(WIDTH, HEIGHT, false);
             app.setTargetFrameRate(FPS);
-            app.setShowFPS(true);
+            app.setShowFPS(false);
             app.start();
         } catch(SlickException e) {
         }
@@ -50,7 +50,7 @@ public class KanonaiOnline extends StateBasedGame {
     public void initStatesList(GameContainer gc) throws SlickException {
         // The first state added will be the one that is loaded first, when the application is launched
         this.addState(new SplashScreen());
-        //this.addState(new MainMenu(MAINMENU));
+        //this.addState(new MainMenu());
         //this.addState(new Game(GAME));
     }
     
