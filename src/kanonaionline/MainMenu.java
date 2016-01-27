@@ -10,9 +10,12 @@ import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
+import org.newdawn.slick.fills.GradientFill;
+import org.newdawn.slick.geom.Rectangle;
 import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.svg.Gradient;
+import org.newdawn.slick.svg.RadialGradientFill;
 
 /**
  *
@@ -35,6 +38,9 @@ public class MainMenu implements GameState {
         g.setBackground(Color.blue);
         g.setColor(Color.white);
         g.drawString("Menu", 200, 200);
+        GradientFill grad = new GradientFill(400,0, Color.black, 400, 500, Color.white, true);
+        Rectangle rect = new Rectangle(0, 0, 800, 500);
+        g.fill(rect, grad);
     }
 
     @Override

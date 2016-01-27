@@ -35,9 +35,10 @@ public class SplashScreen implements GameState {
     
     private final Image[] frames = new Image[4];
     
-    private final int[][] color = new int[100][3];
+    private final Image[] pressStart = new Image[13];
     
     private final Animation splashs;
+    private final Animation startGame;
     
     @Override
     public int getID() {
@@ -51,6 +52,21 @@ public class SplashScreen implements GameState {
         frames[2] = new Image("res/splash2.png");
         frames[3] = new Image("res/splash3.png");
         splashs = new Animation(frames, 200);
+        
+        pressStart[0] = new Image("res/press_space.png");
+        pressStart[1] = new Image("res/press_space1.png");
+        pressStart[2] = new Image("res/press_space2.png");
+        pressStart[3] = new Image("res/press_space3.png");
+        pressStart[4] = new Image("res/press_space3.png");
+        pressStart[5] = new Image("res/press_space2.png");
+        pressStart[6] = new Image("res/press_space1.png");
+        pressStart[7] = new Image("res/press_space.png");
+        pressStart[8] = new Image("res/press_space.png");
+        pressStart[9] = new Image("res/press_space.png");
+        pressStart[10] = new Image("res/press_space.png");
+        pressStart[11] = new Image("res/press_space.png");
+        pressStart[12] = new Image("res/press_space.png");
+        startGame = new Animation(pressStart, 100);
     }
 
     @Override
@@ -64,6 +80,7 @@ public class SplashScreen implements GameState {
     public void render(GameContainer gc, StateBasedGame sbg, Graphics grphcs) throws SlickException {
        
         grphcs.drawAnimation(splashs, 0, 0);
+        grphcs.drawAnimation(startGame, 240, 260);
         splash.flushPixelData();
         
     }
