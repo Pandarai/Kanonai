@@ -6,6 +6,7 @@
 package kanonaionline;
 
 import java.util.concurrent.ThreadLocalRandom;
+import kanonaionline.Assets.AnimationLoader;
 import org.newdawn.slick.Animation;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
@@ -14,15 +15,10 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.command.InputProvider;
-import org.newdawn.slick.command.KeyControl;
 import org.newdawn.slick.state.GameState;
 import org.newdawn.slick.state.StateBasedGame;
 import org.newdawn.slick.state.transition.FadeInTransition;
 import org.newdawn.slick.state.transition.FadeOutTransition;
-import org.newdawn.slick.state.transition.HorizontalSplitTransition;
-import org.newdawn.slick.state.transition.Transition;
-import org.newdawn.slick.state.transition.VerticalSplitTransition;
-
 /**
  *
  * @author Charley_Micu
@@ -30,10 +26,6 @@ import org.newdawn.slick.state.transition.VerticalSplitTransition;
 public class SplashScreen implements GameState {
 
     private final int ID = 0;
-    
-    private final Image splash;
-    
-    private final Image[] frames = new Image[4];
     
     private final Image[] pressStart = new Image[13];
     
@@ -46,27 +38,9 @@ public class SplashScreen implements GameState {
     }
     
     public SplashScreen() throws SlickException{
-        this.splash = new Image("res/splash.png");
-        frames[0] = splash;
-        frames[1] = new Image("res/splash1.png");
-        frames[2] = new Image("res/splash2.png");
-        frames[3] = new Image("res/splash3.png");
-        splashs = new Animation(frames, 200);
         
-        pressStart[0] = new Image("res/press_space.png");
-        pressStart[1] = new Image("res/press_space1.png");
-        pressStart[2] = new Image("res/press_space2.png");
-        pressStart[3] = new Image("res/press_space3.png");
-        pressStart[4] = new Image("res/press_space3.png");
-        pressStart[5] = new Image("res/press_space2.png");
-        pressStart[6] = new Image("res/press_space1.png");
-        pressStart[7] = new Image("res/press_space.png");
-        pressStart[8] = new Image("res/press_space.png");
-        pressStart[9] = new Image("res/press_space.png");
-        pressStart[10] = new Image("res/press_space.png");
-        pressStart[11] = new Image("res/press_space.png");
-        pressStart[12] = new Image("res/press_space.png");
-        startGame = new Animation(pressStart, 100);
+        splashs = new AnimationLoader("res/splash", 200).getAnimation();
+        startGame = new AnimationLoader("res/pressSpace", 100).getAnimation();
     }
 
     @Override
@@ -81,7 +55,6 @@ public class SplashScreen implements GameState {
        
         grphcs.drawAnimation(splashs, 0, 0);
         grphcs.drawAnimation(startGame, 240, 260);
-        splash.flushPixelData();
         
     }
     
